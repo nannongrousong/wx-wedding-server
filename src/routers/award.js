@@ -25,7 +25,8 @@ router.get('/', (req, res) => {
 
 //  获取当前用户的获奖记录
 router.get('/record', (req, res) => {
-    let userID = req.session.userID;
+    let { token } = req.query;
+    let userID = utils.decryptData(token);
 
     if (userID == undefined || userID == '') {
         return res.json({ code: false, info: errorInfo.USER_INFO_LOST });
@@ -103,7 +104,7 @@ router.get('/lottery', (req, res) => {
             return res.send({ code: true, data: { deg: randomDeg, award: {} } });
         }
 
-		console.log(`用户:${userID},奖品:${awardList[randomAwardIndex].name};时间:${new Date().toLocaleString()}`)
+        console.log(`用户:${userID},奖品:${awardList[randomAwardIndex].name};时间:${new Date().toLocaleString()}`)
         //  记录表更新 && 奖品表剩余数量更新
         awardM.insert({
             userID,
