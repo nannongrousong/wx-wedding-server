@@ -68,7 +68,7 @@ const insert = (params, callBack) => {
         }
 
         let sql1 = 'insert into tbl_award_record(user_id,award_id) values(?,?)';
-        let {userID, awardID} = params
+        let { userID, awardID } = params
         let sqlParams1 = [userID, awardID]
         connection.query(sql1, sqlParams1, (err, res) => {
             if (err) {
@@ -107,7 +107,7 @@ const insert = (params, callBack) => {
 
 /**
  * 更新获奖记录的备注信息 
- * @param {Object} params 查询参数。{recordID: '', mark1: ''}
+ * @param {Object} params 查询参数。{recordID: '', phone: ''}
  * @param {*} callBack 回调函数。param1:操作结果
  */
 const updateMark = (params, callBack) => {
@@ -115,8 +115,8 @@ const updateMark = (params, callBack) => {
     connection.connect();
 
     let sql = 'update tbl_award_record set mark1 = ? where record_id = ?'
-    let {mark1, recordID} = params
-    let sqlParam = [mark1, recordID]
+    let { phone, recordID } = params
+    let sqlParam = [phone, recordID]
 
     connection.query(sql, sqlParam, (err, res) => {
         if (err) {

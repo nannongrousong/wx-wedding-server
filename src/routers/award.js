@@ -49,9 +49,10 @@ router.get('/record', (req, res) => {
 
 //  纯概率获取抽中的奖品
 router.get('/lottery', (req, res) => {
-    let userID = req.session.userID;
+    let { token } = req.query;
+    let userID = utils.decryptData(token);
 
-    if (userID == undefined) {
+    if (!userID) {
         return res.json({ code: false, info: errorInfo.USER_INFO_LOST });
     }
 
@@ -141,14 +142,13 @@ router.get('/lottery', (req, res) => {
 
 //  更新当前记录的备注信息（奖品联系方式等）
 router.post('/mark', (req, res) => {
-    let mark1 = req.body.mark1;
-    let recordID = req.body.recordID;
+    let { phone, recordID } = req.body;
 
-    if (mark1 == undefined || recordID == undefined) {
+    if (phone == undefined || recordID == undefined) {
         return res.json({ code: false, info: errorInfo.PARAM_INCOMPLETE });
     }
 
-    awardM.updateMark({ recordID, mark1 }, (code) => {
+    awardM.updateMark({ recordID, phone }, (code) => {
         res.json({ code: code, info: '' })
     })
 })

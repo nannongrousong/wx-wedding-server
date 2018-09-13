@@ -63,6 +63,6 @@ const edit = (params, callBack) => {
 
 
 module.exports = {
-    getPortraitUrl: getPortraitUrl,
-    edit: edit
+    getPortraitUrl,
+    edit
 }
