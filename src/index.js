@@ -2,11 +2,13 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const http = require('http');
+const bodyParser = require('body-parser');
 const server = http.createServer(app);
-const serverConfig = require('../config/server.config')
-const indexRouter = require('./routers/index')
+const serverConfig = require('./config/global')
+const loginRouter = require('./routers/login')
 const awardRouter = require('./routers/award')
 const signRouter = require('./routers/sign')
+const barrageRouter = require('./routers/barrage');
 const log4js = require('./common/log4js')
 
 server.listen(serverConfig.serverPort, () => {
@@ -15,9 +17,12 @@ server.listen(serverConfig.serverPort, () => {
 
 log4js.init(app);
 
-app.use('/', indexRouter)
+app.use(bodyParser.json())
+
+app.use('/login', loginRouter)
 app.use('/sign', signRouter)
 app.use('/award', awardRouter);
+app.use('/barrage', barrageRouter);
 
 app.get('/error', (req, res, next) => {
     console.error('内部服务器错误[内部跳转]');

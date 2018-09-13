@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Do something at a wedding",
   "scripts": {
-    "express-server": "nodemon ./server/index.js"
+    "start": "nodemon ./src/index.js"
   },
   "keywords": [],
   "author": "nannongrousong",
@@ -13,6 +13,7 @@
     "nodemon": "^1.17.3"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "log4js": "^2.6.1",
     "mysql": "^2.15.0"

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const awardM = require('../model/award')
-const serverConfig = require('../../config/server.config')
+const serverConfig = require('../config/global');
 const utils = require('../common/utils')
 const errorInfo = require('../common/errorInfo')
 

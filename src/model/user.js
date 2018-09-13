@@ -1,5 +1,5 @@
 const mysql = require('mysql')
-const mysqlConf = require('../../config/server.config').mysql
+const mysqlConf = require('../config/global').mysql
 
 /**
  * 通过userID获取头像地址
