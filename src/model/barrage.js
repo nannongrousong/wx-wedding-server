@@ -42,7 +42,7 @@ const list = (params, callBack) => {
     
     let { lastST = 0 } = params;
     let sqlParams = [lastST];
-    let sql = 'select b.nick_name,b.portrait_url,a.barrage_id,a.user_id,a.text,to_seconds(a.send_time) * 1000 + microsecond(a.send_time) div 1000 as send_time from tbl_barrage_info a,tbl_user_info b where a.user_id = b.user_id and to_seconds(a.send_time) * 1000 + microsecond(a.send_time) div 1000 > ? ' + (lastST == 0 ? 'limit 4' : '');
+    let sql = 'select b.nick_name,b.portrait_url,a.barrage_id,a.user_id,a.text,to_seconds(a.send_time) * 1000 + microsecond(a.send_time) div 1000 as send_time from tbl_barrage_info a,tbl_user_info b where a.user_id = b.user_id and to_seconds(a.send_time) * 1000 + microsecond(a.send_time) div 1000 > ? ' + (lastST == 0 ? 'limit 50' : '');
     
     connection.query(sql, sqlParams, (err, res) => {
         if (err) {

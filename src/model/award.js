@@ -135,8 +135,8 @@ const updateMark = (params, callBack) => {
 }
 
 module.exports = {
-    list: list,
-    insert: insert,
-    getAwardRec: getAwardRec,
-    updateMark: updateMark
+    list,
+    insert,
+    getAwardRec,
+    updateMark
 }

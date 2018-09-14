@@ -15,4 +15,21 @@ router.get('/', (req, res) => {
     });
 })
 
+//  插入弹幕
+router.post('/', (req, res) => {
+    let { token, text } = req.body;
+    let userID = utils.decryptData(token);
+
+    if (!userID) {
+        return res.json({ code: false, info: errorInfo.USER_INFO_LOST });
+    }
+
+    barrageM.insert({
+        userID,
+        text
+    }, (code) => {
+        return res.json({code, info: code ? '' : errorInfo.DB_OPER_ERROR});
+    })
+})
+
 module.exports = router;

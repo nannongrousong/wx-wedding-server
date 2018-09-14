@@ -60,6 +60,6 @@ const getState = (params, callBack) => {
 }
 
 module.exports = {
-    updateState: updateState,
-    getState: getState
+    updateState,
+    getState
 }
