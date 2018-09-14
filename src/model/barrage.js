@@ -39,11 +39,14 @@ const insert = (params, callBack) => {
 const list = (params, callBack) => {
     const connection = mysql.createConnection(mysqlConf);
     connection.connect();
-    
-    let { lastST = 0 } = params;
+
+    let { lastST = '' } = params;
     let sqlParams = [lastST];
-    let sql = 'select b.nick_name,b.portrait_url,a.barrage_id,a.user_id,a.text,to_seconds(a.send_time) * 1000 + microsecond(a.send_time) div 1000 as send_time from tbl_barrage_info a,tbl_user_info b where a.user_id = b.user_id and to_seconds(a.send_time) * 1000 + microsecond(a.send_time) div 1000 > ? ' + (lastST == 0 ? 'limit 50' : '');
-    
+    let sql = `select users.nick_name,users.portrait_url,barrage.user_id,barrage.text,barrage.barrage_id,unix_timestamp(barrage.send_time) as send_time `
+        + `from tbl_barrage_info barrage, tbl_user_info users `
+        + `where barrage.user_id = users.user_id and unix_timestamp(send_time) > ? `
+        + `order by send_time asc ${lastST ? '' : 'limit 50'}`;
+
     connection.query(sql, sqlParams, (err, res) => {
         if (err) {
             console.error(err);

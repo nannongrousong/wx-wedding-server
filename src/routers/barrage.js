@@ -6,7 +6,7 @@ const errorInfo = require('../common/errorInfo')
 //  获取弹幕列表
 router.get('/', (req, res) => {
     let { lastST } = req.query;
-    barrageM.list({ lastST: lastST * 1 }, (code, barrageList) => {
+    barrageM.list({ lastST }, (code, barrageList) => {
         if (code) {
             res.json({ code: true, data: barrageList });
         } else {
