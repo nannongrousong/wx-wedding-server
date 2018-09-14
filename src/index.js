@@ -19,6 +19,13 @@ log4js.init(app);
 
 app.use(bodyParser.json())
 
+app.all('*', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    next();
+});
+
 app.use('/login', loginRouter)
 app.use('/sign', signRouter)
 app.use('/award', awardRouter);
