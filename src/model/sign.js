@@ -2,46 +2,17 @@ const mysql = require('mysql')
 const mysqlConf = require('../config/global').mysql
 
 /**
- * 更新签到状态
- * @param {Object} params  参数信息。{userID: '', signState: ''}
- * @param {Function} callBack 回调函数。param1:操作结果
- */
-const updateState = (params, callBack) => {
-    const connection = mysql.createConnection(mysqlConf);
-    connection.connect();
-
-    let sql = 'replace into tbl_sign_info values(?,?)';
-    let {userID, signState} = params
-    let sqlParams = [userID, signState];
-
-    connection.query(sql, sqlParams, (err, res) => {
-        if (err) {
-            console.error(err)
-            return callBack(false);
-        }
-
-        if(res.affectedRows >= 1) {
-            return callBack(true);
-        }
-
-        callBack(false);
-    })
-
-    connection.end();
-}
-
-/**
- * 获取用户签到信息
- * @param {Object} params 查询参数。{userID: ''}
+ * 获取所有有效签到
+ * @param {Object} params 查询参数。{ where: '' }
  * @param {Function} callBack 回调函数。param1:操作结果;param2:签到状态
  */
-const getState = (params, callBack) => {
+const getSignRec = (params, callBack) => {
     const connection = mysql.createConnection(mysqlConf);
     connection.connect();
 
-    let sql = 'select sign_state from tbl_sign_info where user_id = ?';
-    let {userID} = params;
-    let sqlParams = [userID];
+    let sql = 'select users.nick_name,users.portrait_url,users.user_id from tbl_user_info users, tbl_sign_info signs where users.user_id = signs.user_id and signs.sign_position = ? and signs.sign_state = 1';
+    let { where } = params;
+    let sqlParams = [where];
 
     connection.query(sql, sqlParams, (err, res) => {
         if (err) {
@@ -50,7 +21,7 @@ const getState = (params, callBack) => {
         }
 
         if (res.length > 0) {
-            return callBack(true, res[0].sign_state);
+            return callBack(true, res);
         }
 
         callBack(false)
@@ -60,6 +31,5 @@ const getState = (params, callBack) => {
 }
 
 module.exports = {
-    updateState,
-    getState
+    getSignRec
 }
