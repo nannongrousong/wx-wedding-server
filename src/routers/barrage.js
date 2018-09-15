@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 const barrageM = require('../model/barrage')
 const errorInfo = require('../common/errorInfo')
+const utils = require('../common/utils')
 
 //  获取弹幕列表
 router.get('/', (req, res) => {
