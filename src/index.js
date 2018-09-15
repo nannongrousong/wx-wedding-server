@@ -9,6 +9,7 @@ const loginRouter = require('./routers/login')
 const awardRouter = require('./routers/award')
 const signRouter = require('./routers/sign')
 const barrageRouter = require('./routers/barrage');
+const configRouter = require('./routers/config');
 const log4js = require('./common/log4js')
 
 server.listen(serverConfig.serverPort, () => {
@@ -30,6 +31,7 @@ app.use('/login', loginRouter)
 app.use('/sign', signRouter)
 app.use('/award', awardRouter);
 app.use('/barrage', barrageRouter);
+app.use('/config', configRouter);
 
 app.get('/error', (req, res, next) => {
     console.error('内部服务器错误[内部跳转]');
