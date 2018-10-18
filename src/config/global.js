@@ -3,7 +3,7 @@ module.exports = {
         appID: '',
         appSecret: ''
     },
-    serverPort: 81,
+    serverPort: 10003,
     mysql: {
         host: '',
         user: '',
