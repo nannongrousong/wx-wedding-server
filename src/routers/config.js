@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const configM = require('../model/config')
+const configM = require('../service/config')
 const errorInfo = require('../common/errorInfo')
 
 //  获取所有有效签到

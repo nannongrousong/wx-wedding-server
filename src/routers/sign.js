@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const signM = require('../model/sign')
+const signM = require('../service/sign')
 const errorInfo = require('../common/errorInfo')
 const globalConfig = require('../config/global');
 

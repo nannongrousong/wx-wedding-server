@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const userM = require('../model/user')
+const userM = require('../service/user')
 const errorInfo = require('../common/errorInfo')
 const utils = require('../common/utils')
 const globalConfig = require('../config/global');

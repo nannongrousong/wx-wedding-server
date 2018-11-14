@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const barrageM = require('../model/barrage')
+const barrageM = require('../service/barrage')
 const errorInfo = require('../common/errorInfo')
 const utils = require('../common/utils')
 
